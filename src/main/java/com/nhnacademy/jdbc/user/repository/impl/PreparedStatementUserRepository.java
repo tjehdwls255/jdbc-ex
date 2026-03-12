@@ -17,7 +17,10 @@ public class PreparedStatementUserRepository implements UserRepository {
         try(Connection connection = DbUtils.getConnection(); Statement statement = connection.prepareStatement(sql);
         ){
             try(ResultSet rs = statement.executeQuery(sql)){
-                statement.set
+                if(rs.next()){
+                    statement.executeUpdate(sql);
+
+                }
 
             }
         }catch (SQLException e){
