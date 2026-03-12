@@ -6,6 +6,7 @@ import com.nhnacademy.jdbc.student.repository.impl.StatementStudentRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.*;
 
+import java.time.LocalDateTime;
 import java.util.Iterator;
 import java.util.Optional;
 import java.util.Random;
@@ -29,7 +30,7 @@ class StatementStudentRepositoryTest {
             String name="학생" + i;
             Student.GENDER gender = Student.GENDER.M;
             int age =iterator.next();
-            Student student = new Student(id, name, gender,age);
+            Student student = new Student(id, name, gender,age, LocalDateTime.now());
             studentRepository.deleteById(id);
             studentRepository.save(student);
         }
@@ -41,7 +42,7 @@ class StatementStudentRepositoryTest {
     @Order(1)
     @DisplayName("insert student : student 100")
     void save() {
-        Student newStudent = new Student("student100","학생100", Student.GENDER.M,30);
+        Student newStudent = new Student("student100","학생100", Student.GENDER.M,30,LocalDateTime.now());
         int result = studentRepository.save(newStudent);
         Assertions.assertEquals(1,result);
     }
@@ -74,7 +75,7 @@ class StatementStudentRepositoryTest {
     @DisplayName("update : student1")
     void update() {
 
-        Student student = new Student("student1","엔에이치엔아카데미", Student.GENDER.F,30);
+        Student student = new Student("student1","엔에이치엔아카데미", Student.GENDER.F,30,LocalDateTime.now());
         int result = studentRepository.update(student);
         //Assume.assumeFalse(result>0);
 
