@@ -17,6 +17,7 @@ public class StatementUserRepository implements UserRepository {
     @Override
     public Optional<User> findByUserIdAndUserPassword(String userId, String userPassword) {
         //todo#1 아이디, 비밀번호가 일치하는 User 조회
+        String sql ="select * from jdbc_students where id='%s' and password='%s'";
 
         return Optional.empty();
     }
