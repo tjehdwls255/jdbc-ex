@@ -125,7 +125,7 @@ class StatementUserRepositoryTest {
     @DisplayName("delete by userid : user100")
     void deleteByUserId() {
 
-        String id = "user100";
+        String id = "user1";
         int result = userRepository.deleteByUserId(id);
         Assertions.assertAll(
             ()->Assertions.assertEquals(1,result),

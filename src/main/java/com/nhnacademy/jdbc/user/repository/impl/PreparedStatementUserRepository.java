@@ -13,8 +13,17 @@ public class PreparedStatementUserRepository implements UserRepository {
     @Override
     public Optional<User> findByUserIdAndUserPassword(String userId, String userPassword) {
         //todo#11 -PreparedStatement- 아이디 , 비밀번호가 일치하는 회원조회
+        String sql = "select * from jdbc_users where user_id=? and user_password=?";
+        try(Connection connection = DbUtils.getConnection(); Statement statement = connection.prepareStatement(sql);
+        ){
+            try(ResultSet rs = statement.executeQuery(sql)){
+                statement.set
 
-        return Optional.empty();
+            }
+        }catch (SQLException e){
+            throw new RuntimeException();
+        }
+
     }
 
     @Override
