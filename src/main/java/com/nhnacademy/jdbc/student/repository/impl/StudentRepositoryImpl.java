@@ -2,6 +2,7 @@ package com.nhnacademy.jdbc.student.repository.impl;
 
 import com.nhnacademy.jdbc.student.domain.Student;
 import com.nhnacademy.jdbc.student.repository.StudentRepository;
+import com.nhnacademy.jdbc.util.DbUtils;
 import lombok.extern.slf4j.Slf4j;
 import java.sql.*;
 import java.util.Optional;
@@ -13,7 +14,11 @@ public class StudentRepositoryImpl implements StudentRepository {
     public int save(Connection connection, Student student){
         //todo#2 학생등록
         String sql = "insert into jdbc_students(id,name,gender,age) values(?,?,?,?)";
-
+        try(PreparedStatement statement = connection.prepareStatement(sql);){
+        statement.setString(1, student.getId());
+        }catch(SQLException e){
+            throw new RuntimeException();
+        }
         return 0;
     }
 
