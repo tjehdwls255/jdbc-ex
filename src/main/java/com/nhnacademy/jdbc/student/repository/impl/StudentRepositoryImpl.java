@@ -12,6 +12,8 @@ public class StudentRepositoryImpl implements StudentRepository {
     @Override
     public int save(Connection connection, Student student){
         //todo#2 학생등록
+        String sql = "insert into jdbc_students(id,name,gender,age) values(?,?,?,?)";
+
         return 0;
     }
 
