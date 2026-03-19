@@ -17,14 +17,24 @@ public class ClubRepositoryImpl implements ClubRepository {
         //todo#3 club 조회
         String sql = "select * from jdbc_club where club_id=?";
         ResultSet rs = null;
-        try(PreparedStatement preparedStatement = connection.prepareStatement(sql)){
-            preparedStatement.setString(1,"clubId");
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, "clubId");
             rs = preparedStatement.executeQuery();
-            if(rs.next()){
-
+            if (rs.next()) {
+                return Optional.of(
+                        new Club(rs.getString("club_id"),
+                                rs.getString("club_name"),
+                                rs.getTimestamp("club_created_at").toLocalDateTime())
+                );
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             throw new RuntimeException();
+        } finally {
+            try {
+                rs.close();
+            } catch (SQLException e) {
+                throw new RuntimeException();
+            }
         }
         return Optional.empty();
     }
@@ -32,27 +42,45 @@ public class ClubRepositoryImpl implements ClubRepository {
     @Override
     public int save(Connection connection, Club club) {
         //todo#4 club 생성, executeUpdate() 결과를 반환
-        return 0;
+        String sql = "insert into jdbc_club (club_id,club_name) values(?,?)";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, "clubId");
+            preparedStatement.setString(2, "clubName");
+            return preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException();
+        }
     }
 
     @Override
     public int update(Connection connection, Club club) {
         //todo#5 club 수정, clubName을 수정합니다. executeUpdate()결과를 반환
-
-        return 0;
+        String sql = "update jdbc_club set club_name=? where club_id=?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1,"clubName");
+            preparedStatement.setString(2,"clubId");
+            return preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException();
+        }
     }
 
     @Override
     public int deleteByClubId(Connection connection, String clubId) {
         //todo#6 club 삭제, executeUpdate()결과 반환
-
-        return 0;
+        String sql = "delete from jdbc_club where club_id=?";
+        try(PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+            preparedStatement.setString(1,"clubId");
+            return preparedStatement.executeUpdate();
+        } catch (SQLException e){
+            throw new RuntimeException();
+        }
     }
 
     @Override
     public int countByClubId(Connection connection, String clubId) {
         //todo#7 clubId에 해당하는 club의 count를 반환
-
+        String sql = ""
         return 0;
     }
 }
