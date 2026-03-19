@@ -2,6 +2,7 @@ package com.nhnacademy.jdbc.club.repository.impl;
 
 import com.nhnacademy.jdbc.club.domain.Club;
 import com.nhnacademy.jdbc.club.repository.ClubRepository;
+import com.nhnacademy.jdbc.student.domain.Student;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,12 +16,12 @@ public class ClubRepositoryImpl implements ClubRepository {
     public Optional<Club> findByClubId(Connection connection, String clubId) {
         //todo#3 club 조회
         String sql = "select * from jdbc_club where club_id=?";
+        ResultSet rs = null;
         try(PreparedStatement preparedStatement = connection.prepareStatement(sql)){
             preparedStatement.setString(1,"clubId");
-            ResultSet rs = null;
+            rs = preparedStatement.executeQuery();
             if(rs.next()){
-                rs = preparedStatement.executeQuery(rs.getString(clubId),
-                        rs.getString(), rs.getTimestamp(c));
+
             }
         }catch (SQLException e){
             throw new RuntimeException();
