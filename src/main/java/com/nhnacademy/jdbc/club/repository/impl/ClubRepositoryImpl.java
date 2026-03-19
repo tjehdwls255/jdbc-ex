@@ -14,7 +14,17 @@ public class ClubRepositoryImpl implements ClubRepository {
     @Override
     public Optional<Club> findByClubId(Connection connection, String clubId) {
         //todo#3 club 조회
-
+        String sql = "select * from jdbc_club where club_id=?";
+        try(PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+            preparedStatement.setString(1,"clubId");
+            ResultSet rs = null;
+            if(rs.next()){
+                rs = preparedStatement.executeQuery(rs.getString(clubId),
+                        rs.getString(), rs.getTimestamp(c));
+            }
+        }catch (SQLException e){
+            throw new RuntimeException();
+        }
         return Optional.empty();
     }
 
