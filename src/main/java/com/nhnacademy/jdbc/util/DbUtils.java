@@ -21,7 +21,7 @@ public class DbUtils {
         //#todo#0 {ip},{database},{username},{password} 설정
         basicDataSource.setUrl("jdbc:mysql://s4.java21.net:13306/nhn_academy_20");
         basicDataSource.setUsername("nhn_academy_20");
-        basicDataSource.setPassword("!bFM6ES*DaL@wLjv");
+        basicDataSource.setPassword("!bFM6ES*DaL@wLjV");
 
         basicDataSource.setInitialSize(5);
         basicDataSource.setMaxTotal(5);
