@@ -19,7 +19,7 @@ public class DbUtils {
         BasicDataSource basicDataSource = new BasicDataSource();
 
         //#todo#0 {ip},{database},{username},{password} 설정
-        basicDataSource.setUrl("jdbc:mysql://s4.java21.net:3306/nhn_academy_20");
+        basicDataSource.setUrl("jdbc:mysql://s4.java21.net:13306/nhn_academy_20");
         basicDataSource.setUsername("nhn_academy_20");
         basicDataSource.setPassword("!bFM6ES*DaL@wLjv");
 
